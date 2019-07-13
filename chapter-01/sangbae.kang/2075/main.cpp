@@ -74,8 +74,8 @@ void problem2075(int *pArray, int n) {
 // 답. 모범 답안이 없어서 이게 문제 의도에 부합하는지 확신할 수 없음.
 //
 void problem2075v2() {
-    priority_queue<int> pqueue;     // compare default가 less<T>라
-                                    // 내림차순이 기본이다.
+    priority_queue<int, vector<int>, greater<>> pqueue;     // compare default가 less<T>라
+                                                            // 내림차순이 기본이다.
 
     int n;
     cin >> n;
