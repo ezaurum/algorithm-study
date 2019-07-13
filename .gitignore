@@ -1,12 +1,7 @@
-<<<<<<< HEAD
 # Specify filepatterns you want git to ignore.
 .idea/
 cmake-build-debug/
-=======
 src
 out
-.idea
 *.iml
-
->>>>>>> e34cbcfa3e00c3d80e8d17837d07099e882af61a
 
