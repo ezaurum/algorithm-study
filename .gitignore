@@ -1,7 +1,6 @@
 # Specify filepatterns you want git to ignore.
 .idea/
 cmake-build-debug/
-src
 out
 *.iml
 node_modules
