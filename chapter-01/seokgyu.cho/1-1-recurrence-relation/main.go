@@ -1,4 +1,4 @@
-package main
+package __1_recurrence_relation
 
 import "fmt"
 
