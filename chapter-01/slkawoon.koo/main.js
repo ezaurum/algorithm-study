@@ -1,1 +1,1 @@
-var str;
+var main = () => console.log('start study');
