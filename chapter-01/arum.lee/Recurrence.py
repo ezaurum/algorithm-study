@@ -1,18 +1,35 @@
-# Binomial Coefficients 를 어떻게 줄일지 고민하다가 nCr로 바꿈....
+import math
 
 
 def ncr(n, r):
-    return factorial(n) / (factorial(r) * factorial(n - r))
+    return int((fact(n)) / ((fact(r)) * fact(n - r)))
 
 
-def factorial(n):
+def fact(n):
+    # 이거 쓰려다가 양심에 찔려서..... -_-;;
+    # return math.factorial(n)
     res = 1
     for i in range(2, n+1):
         res = res * i
     return res
 
 
+def triangle(rows):
+    result = []
+    for count in range(rows):
+        row = []
+        for element in range(count + 1):
+            row.append(ncr(count, element))
+        result.append(row)
+    return result
+
+
 for x in range(6):
     for y in range(6):
         if y <= x:
-            print(str(x) + "C" + str(y) + " = " + str(int(ncr(x, y))))
+            print(str(x) + "C" + str(y) + " = " + str(ncr(x, y)))
+
+
+for row in triangle(6):
+    print(row)
+
