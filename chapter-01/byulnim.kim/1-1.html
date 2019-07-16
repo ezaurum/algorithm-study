@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>1-1</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+    <script type="text/javascript">
+        function main() {
+            var n, r;
+            for (n=0; n <= 5; n++) {
+                for (r=0; r <= n; r++) {
+                    //document.getElementsByTagName("body").append
+                    console.log(n + " C " + r +"=" + combi(n, r));
+                }
+                console.log("------");
+            }
+        }
+
+        function combi(n, r) {
+            var i;
+            var p= 1;
+            for (i=1; i<=r; i++) {
+                p = p*(n-i+1)/i;
+            }
+            return p;
+        }
+
+        main();
+    </script>
+  </head>
+  <body>
+    i와 1을 잘 비교하자. p*(n-i+1)/i; 이 식을 p*(n-1+1)/i; 로 써서 엄청 해맴...
+  </body>
+</html>
