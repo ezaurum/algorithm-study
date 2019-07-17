@@ -8,7 +8,7 @@ for i in range(num):
 
     for j in range(num):
         if a[j] > a[i]:
-            rank[i] += 1
+            rank[i] += 1  # 파이썬은 후위연산자 ++ 안되네
 
 print("점수 순위")
 
