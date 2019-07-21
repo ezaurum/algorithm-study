@@ -21,19 +21,14 @@ class LinearCongruentialGenerator {
     }
 }
 
-let lcg = LinearCongruentialGenerator(x0: 8, A: 13, C: 25, M: 128)
-for _ in 0...1000 {
-    lcg.generate()
-}
-
 class LCGTest: XCTestCase {
     var M: Int!
     var lcg: LinearCongruentialGenerator!
     
     override func setUp() {
         super.setUp()
-        M = 8192
-        lcg = LinearCongruentialGenerator(x0: 8, A: 13, C: 25, M: self.M)
+        M = 4096
+        lcg = LinearCongruentialGenerator(x0: 13, A: 109, C: 1021, M: self.M)
     }
     
     override func tearDown() {
@@ -52,6 +47,35 @@ class LCGTest: XCTestCase {
         history
         print("max: \(history.max()!)")
         print("min: \(history.min()!)")
+    }
+    
+    func testChiSquared() {
+        
+        func rnd() -> Double {
+            return Double(lcg.generate()) / (Double(M) - 0.9)
+        }
+        
+        let n = 1000
+        let m = 10.0
+        let f = n / Int(m) // 기댓값
+        var e = 0.0
+        
+        var data = Array<Int>(repeating: 0, count: Int(m))
+        
+        for _ in 0..<n {
+            let random = Int(rnd() * m)
+            data[random] += 1
+        }
+        
+        for i in 0..<data.count {
+            var str = "\(i): \(data[i]) "
+            for _ in 0..<data[i] {
+                str += "*"
+            }
+            print(str)
+            e += Double((data[i] - f) * (data[i] - f)) / Double(f)
+        }
+        print("χ2: \(e)")
     }
 }
 
