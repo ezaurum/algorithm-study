@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <title>1-3</title>
+    <script type="text/javascript">
+        var randomNum = 13;
+        var rank = new Array;
+        
+        function main() {
+          var i;
+          var row = "";
+          for (i=0; i<100; i++) {
+            row += random() + " ";
+            if (i % 10 == 9) {
+              console.log(row);
+              row = "";
+            }
+          }
+        }
+        function random() {
+          randomNum = (randomNum * 109 + 1021) % 32768;
+          return randomNum;
+        }
+        main();
+    </script>
+  </head>
+  <body>
+    <h1>2-1. 난수</h1>
+    <div>
+        <h2>예제 8 : 일양난수 (선형합동법)</h2>
+        <div>
+          선형 합동법을 이용해서 일양 난수를 발생시킨다.
+        </div>
+        <h3>프로그램 : 일양난수 (선형합동법)</h3>
+        <pre>
+          var randomNum = 13;
+          var rank = new Array;
+          
+          function main() {
+            var i;
+            var row = "";
+            for (i=0; i&lt;100; i++) {
+              row += random() + " ";
+              if (i % 10 == 9) {
+                console.log(row);
+                row = "";
+              }
+            }
+          }
+          function random() {
+            randomNum = (randomNum * 109 + 1021) % 32768;
+            return randomNum;
+          }
+          main();
+        </pre>
+        <h3>결과</h3>
+        <pre>
+          2438 4619 12972 5945 26434 31511 27848 21797 17598 18659 
+          3236 26065 24058 1903 11840 13629 12022 699 11676 28521 
+          29618 18119 9912 85 10286 8083 30100 5121 2154 6431 
+          13872 5741 4198 32619 17548 13209 31778 24183 15528 22405 
+          18334 579 31364 11825 11994 30415 6688 9117 11734 2075 
+          30588 25545 146 16935 11928 23221 8974 28915 7028 13409 
+          20810 8319 23056 23757 1862 7371 18028 32761 258 29143 
+          31880 2533 14974 27555 22628 9873 28602 5679 30208 16893 
+          7350 15739 12636 2089 32114 28039 9848 25877 3566 29267 
+          12628 1217 2602 22495 28144 21293 28198 27179 14412 31833 
+        </pre>
+        
+    </div>
+  </body>
+</html>
