@@ -6,8 +6,8 @@
 (defn p-f [p t i j]
 ;   (println i j t (x-vector i) (x-vector j))
   (* p (/ (- t (x-vector j))
-          (- (x-vector i) (x-vector j))))
-  )
+          (- (x-vector i) (x-vector j)))))
+  
 
 (defn lagrange-sub-element [i t y-i]
   (loop [j 0
