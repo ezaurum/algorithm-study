@@ -1,0 +1,199 @@
+<html>
+  <head>
+    <title>3-1</title>
+    <script type="text/javascript">
+      function main() {
+        var numbers = [80, 41, 35, 90, 40, 20];
+        var minIndex = 0;
+        for (var i=0; i<numbers.length; i++) {
+          minIndex = i;
+          for (var j=i+1; j<numbers.length; j++) {
+            if (numbers[j] < numbers[minIndex]) {
+              minIndex = j;
+            }
+          }
+          var tmp = numbers[i];
+          numbers[i] = numbers[minIndex];
+          numbers[minIndex] = tmp;
+        }
+        //결과값 출력
+        var result = "";
+        for (i=0; i<numbers.length; i++) {
+          result += numbers[i] + " ";
+        }
+        console.log(result);
+      }
+      main();
+
+      function main2() {
+        var numbers = [80, 41, 35, 90, 40, 20];
+        for (var i=0; i<numbers.length; i++) {
+          for (var j=i+1; j<numbers.length; j++) {
+            if (numbers[j] < numbers[i]) {
+              var tmp = numbers[j];
+              numbers[j] = numbers[i];
+              numbers[i] = tmp;
+              
+            }
+          }
+        }
+        //결과값 출력
+        var result = "";
+        for (i=0; i<numbers.length; i++) {
+          result += numbers[i] + " ";
+        }
+        console.log(result);
+      }
+      main2();
+
+      function main3() {
+        var numbers = [3, 5, 6, 9, 2, 7, 8, 10, 4];
+        var left = 0;
+        var right = numbers.length;
+        var shift = 0;
+        while(left < right) {
+          for (var i=left; i<right; i++) {
+           if (numbers[i] > numbers[i+1]) {
+            shift = i;
+            var tmp = numbers[i];
+            numbers[i] = numbers[i+1];
+            numbers[i+1] = tmp;
+           }
+          }
+          right = shift;
+          for (var i=right; i>left; i--) {
+           if (numbers[i] < numbers[i-1]) {
+            shift = i;
+            var tmp = numbers[i];
+            numbers[i] = numbers[i-1];
+            numbers[i-1] = tmp;
+           }
+          }
+          left = shift;
+        }
+        //결과값 출력
+        var result = "";
+        for (i=0; i<numbers.length; i++) {
+          result += numbers[i] + " ";
+        }
+        console.log(result);
+      }
+      main3();
+    </script>
+  </head>
+  <body>
+    <h1>3-1. 기본 정렬</h1>
+    <div>
+      <h2>예제 18 : 직접 선택법</h2>
+      <div>
+        직접 선택법에 의해 데이터를 오름차순으로 정렬한다.
+      </div>
+      <h3>프로그램 : 직접 선택법에 의한 정렬</h3>
+      <pre>
+        function main() {
+          var numbers = [80, 41, 35, 90, 40, 20];
+          var minIndex = 0;
+          for (var i=0; i&lt;numbers.length; i++) {
+            minIndex = i;
+            for (var j=i+1; j&lt;numbers.length; j++) {
+              if (numbers[j] &lt; numbers[minIndex]) {
+                minIndex = j;
+              }
+            }
+            var tmp = numbers[i];
+            numbers[i] = numbers[minIndex];
+            numbers[minIndex] = tmp;
+          }
+          //결과값 출력
+          var result = "";
+          for (i=0; i&lt;numbers.length; i++) {
+            result += numbers[i] + " ";
+          }
+          console.log(result);
+        }
+        main();
+      </pre>
+      <h3>결과</h3>
+      <pre>
+        20 35 40 41 80 90 
+      </pre>
+      <h2>연습문제 18-1 : 거품 정렬</h2>
+      <div>
+        거품 정렬에 의해 데이터를 오름차순으로 정렬한다.
+      </div>
+      <h3>프로그램 : 거품정렬</h3>
+      <pre>
+          function main2() {
+            var numbers = [80, 41, 35, 90, 40, 20];
+            for (var i=0; i&lt;numbers.length; i++) {
+              for (var j=i+1; j&lt;numbers.length; j++) {
+                if (numbers[j] &lt; numbers[i]) {
+                  var tmp = numbers[j];
+                  numbers[j] = numbers[i];
+                  numbers[i] = tmp;
+                  
+                }
+              }
+            }
+            //결과값 출력
+            var result = "";
+            for (i=0; i&lt;numbers.length; i++) {
+              result += numbers[i] + " ";
+            }
+            console.log(result);
+          }
+          main2();
+      </pre>
+      <h3>결과</h3>
+      <pre>
+        20 35 40 41 80 90 
+      </pre>
+      <h2>연습문제 18-2 : 셰이커 정렬</h2>
+      <div>
+        거품 정렬을 개선한 셰이커 정렬에 의해 정렬한다.<br />
+        마지막에 교환을 수행한 위치를 shift에 저장해두고 다음 번 검사에서 범위로 이용하면 된다.<br />
+        그러나 만일, 오른쪽 끝 부근에 작은 값이 있다면 마지막 교환은 항상 데이터의 뒷부분에서 수행하게 되므로 shift의 효과가 줄어즌다. 따라서 검사를 왼쪽와 오늘쪽 양쪽 방향에서 수행하도록 한다. 이것이 셰이커(Shaker) 정렬이다.
+      </div>
+      <h3>프로그램 : 셰이커 정렬</h3>
+      <pre>
+        function main3() {
+          var numbers = [3, 5, 6, 9, 2, 7, 8, 10, 4];
+          var left = 0;
+          var right = numbers.length;
+          var shift = 0;
+          while(left &lt; right) {
+            for (var i=left; i&lt;right; i++) {
+              if (numbers[i] &gt; numbers[i+1]) {
+              shift = i;
+              var tmp = numbers[i];
+              numbers[i] = numbers[i+1];
+              numbers[i+1] = tmp;
+              }
+            }
+            right = shift;
+            for (var i=right; i&gt;left; i--) {
+              if (numbers[i] &lt; numbers[i-1]) {
+              shift = i;
+              var tmp = numbers[i];
+              numbers[i] = numbers[i-1];
+              numbers[i-1] = tmp;
+              }
+            }
+            left = shift;
+          }
+          //결과값 출력
+          var result = "";
+          for (i=0; i&lt;numbers.length; i++) {
+            result += numbers[i] + " ";
+          }
+          console.log(result);
+        }
+        main3();
+      </pre>
+      <h3>결과</h3>
+      <pre>
+        2 3 4 5 6 7 8 9 10
+      </pre>
+    </div>
+  </body>
+</html>
