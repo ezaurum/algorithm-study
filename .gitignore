@@ -69,3 +69,4 @@ typings/
 
 # goorm ide file
 goorm.manifest
+.vscode/settings.json
