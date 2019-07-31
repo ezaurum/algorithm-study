@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class SumSubArray {
     public static void main(String[] args) {
-        int[] input = {2, 1, -3, 4, -2, 8};
+        int[] input = {10, -20, 10, -5};
         boolean connect = true;
         ArrayList<Integer> outputList = new ArrayList<>();
         int outputSum = 0;
@@ -34,7 +34,7 @@ public class SumSubArray {
             }
             else {
                 // 음수에 이어서 앞에 값보다 큰 값이 왔을 대
-                if (!connect && input[i] > outputSum) {
+                if (!connect && input[i] >= outputSum) {
                     outputList.clear();
                     outputList.add(input[i]);
                     outputSum = input[i];
