@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lagrange Interpolation</title>
+</head>
+<body>
+<canvas id="main">
+</canvas>
+<script>
+let ctx = document.getElementById("main").getContext("2d");
+ctx.canvas.width = window.innerWidth;
+ctx.canvas.height = window.innerHeight;
+
+const numerator = (points, x, k) => {
+  let r = 1
+  const l = points.length
+  for (let i = 0; i < l; i++) {
+    if (i === k) continue
+    r *= x - points[i].x
+  }
+  return r
+}
+
+const denominator = (points, k) => {
+  const self = points[k].x
+  return numerator(points, self, k)
+}
+
+const lagrange = (points, x) => {
+  if (!(points && points.length > 1)) {
+    return 0
+  }
+
+  let y = 0
+  const l = points.length
+  for (let i = 0; i < l; i++) {
+    y += points[i].y * numerator(points, x, i) / denominator(points, i)
+  }
+  return y
+}
+const updateLoop = () => {
+
+  // after update
+  ctx.beginPath()
+  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
+  drawPointLoop(ctx)
+
+  if (pointsArray.length > 1) {
+    drawLoop(ctx)
+  }
+
+  ctx.stroke()
+  ctx.closePath()
+}
+
+const drawPointLoop = (context) => {
+  const l = pointsArray.length
+  for (let i = 0; i < l; i++) {
+    let p = pointsArray[i]
+    context.arc(p.x, p.y, 5, 0, 2 * Math.PI)
+  }
+}
+
+const drawLoop = (context) => {
+
+  let last = pointsArray[pointsArray.length - 1].x
+  let first = pointsArray[0].x
+  for (let x = first; x < last + 100; x++) {
+    let y = lagrange(pointsArray, x)
+    context.arc(x, y, 2, 0, 2 * Math.PI)
+  }
+  console.log('draw')
+}
+
+const pointsArray = []
+
+const fps = 30
+setInterval(updateLoop, 1000 / fps)
+document.getElementById("main").addEventListener("click", (ev) => {
+  // if x direction changed, drop everything before
+  if (pointsArray.length > 0) {
+    let last = pointsArray[pointsArray.length - 1].x
+    if (last > ev.clientX) {
+      pointsArray.splice(0, pointsArray.length)
+    }
+  }
+  pointsArray.push({x: ev.clientX, y: ev.clientY})
+  console.log(pointsArray)
+})
+</script>
+</body>
+</html>
