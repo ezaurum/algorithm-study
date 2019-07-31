@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lagrange Interpolation</title>
+</head>
+<body>
+<canvas id="main">
+</canvas>
+<script>
+let context = document.getElementById("main").getContext("2d");
+context.canvas.width  = window.innerWidth;
+context.canvas.height = window.innerHeight;
+
+const numerator = (points, x, k) => {
+  let r = 1
+  const l = points.length
+  for (let i = 0; i < l; i++) {
+    if (i === k) continue
+    r *= x - points[i].x
+  }
+  return r
+}
+
+const denominator = (points, k) => {
+  const self = points[k].x
+  return numerator(points, self, k)
+}
+
+const lagrange = (points, x) => {
+  if (!(points && points.length > 1)) {
+    return 0
+  }
+
+  let y = 0
+  const l = points.length
+  for (let i = 0; i < l; i++) {
+    y += points[i].y * numerator(points, x, i) / denominator(points, i)
+  }
+  return y
+}
+
+const drawLoop = () => {
+}
+
+const fps = 30
+setInterval(drawLoop, 1000 / fps)
+document.getElementById("main").addEventListener("click", (ev)=>{
+  console.log(ev.clientX)
+  console.log(ev.clientY)
+})
+</script>
+</body>
+</html>
