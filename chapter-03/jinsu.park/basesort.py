@@ -19,4 +19,4 @@ for i in range(n - 1):
 for i in range(0, n):
     print(a[i], end=' ')
 
-print("\ncount : " + str(count) )
+print("count : " + str(count))

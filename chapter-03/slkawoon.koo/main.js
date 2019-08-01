@@ -14,4 +14,31 @@ const main = (arr) => {
   console.log(arr);
 };
 
-main(arr);
+// main(arr);
+
+
+
+
+//이분 탐색
+
+const num = [2, 3, 7, 11, 31, 50, 55, 70, 77, 80];
+
+const searchByDivine = (key) => {
+  let low = 0;
+  let high = 9;
+  let result = 0;
+
+  while (low <= high) {
+    result = Math.round((low + high) / 2);
+    if(num[result] === key) {
+      console.log((result + 1) + '번째');
+      break;
+    } else if (num[result] < key) {
+      low = result + 1;
+    } else {
+      high  = result - 1;
+    }
+  }
+}
+
+searchByDivine(50);
