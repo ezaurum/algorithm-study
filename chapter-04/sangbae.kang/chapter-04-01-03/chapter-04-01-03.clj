@@ -1,4 +1,3 @@
-;;
 ;; 4-2 호너법
 ;;
 (def xs [1 2 3 4 5])
@@ -78,3 +77,6 @@
 (lexical-permutation [1 2 3] 0)
 (lexical-permutation [1 2 3 4] 0)
 
+;;
+;;  https://repl.it/@typeon/chapter-04-recursion
+;;
