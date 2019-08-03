@@ -1,0 +1,187 @@
+<html>
+  <head>
+    <title>4-1</title>
+    <script type="text/javascript">
+      function main() {
+        var n;
+        for (n=0; n < 13; n++) {
+          console.log(n + "! = " + factorial(n));
+        }
+      }
+      function factorial (num) {
+        if (num == 0) {
+          return 1;
+        } else {
+          return num * factorial (num-1);
+        }
+      }
+      main();
+
+      function main2() {
+        var n;
+        for (n=1; n<=20; n++) {
+          console.log(n + " : " + fibonacci(n));
+        }
+      }
+      function fibonacci(num) {
+        if (num == 1 || num == 2) {
+          return 1;
+        } else {
+          return fibonacci(num-1) + fibonacci(num-2);
+        }
+      }
+      main2();
+
+      function main3() {
+        var n, r;
+        for (n=0; n <= 5; n++) {
+          var row = "";
+          for (r=0; r <= n; r++) {
+            row += n + " C " + r +"=" + combi(n, r) + " ";
+          }
+          console.log(row);
+        }
+      }
+      function combi(n, r) {
+        if (r==0 || r==n) {
+          return 1;
+        } else {
+          return combi(n-1, r) + combi(n-1, r-1);
+        }
+      }
+      main3();
+    </script>
+  </head>
+  <body>
+    <h1>4-1. 제귀의 간단한 예</h1>
+    <div>
+      <h2>예제 26 : 팩토리얼의 재귀 해</h2>
+      <div>
+        재귀를 이용해서 n!을 구하는 함수를 작성한다.
+      </div>
+      <h3>프로그램 : 팩토리얼의 재귀 해</h3>
+      <pre>
+        function main() {
+          var n;
+          for (n=0; n&lt;13; n++) {
+            console.log(n + "! = " + factorial(n));
+          }
+        }
+        function factorial (num) {
+          if (num == 0) {
+            return 1;
+          } else {
+            return num * factorial (num-1);
+          }
+        }
+        main();
+      </pre>
+      <h3>결과</h3>
+      <pre>
+        0! = 1
+        1! = 1
+        2! = 2
+        3! = 6
+        4! = 24
+        5! = 120
+        6! = 720
+        7! = 5040
+        8! = 40320
+        9! = 362880
+        10! = 3628800
+        11! = 39916800
+        12! = 479001600
+      </pre>
+      
+      <h2>예제 26-1 : 피보나치 수열</h2>
+      <div>
+        재귀를 이용해서 피보나치 수열을 구한다.
+      </div>
+      <h3>프로그램 : 피보나치 수열(재귀 해)</h3>
+      <pre>
+        function main2() {
+          var n;
+          for (n=1; n&lt;=20; n++) {
+            console.log(n + " : " + fibonacci(n));
+          }
+        }
+        function fibonacci(num) {
+          if (num == 1 || num == 2) {
+            return 1;
+          } else {
+            return fibonacci(num-1) + fibonacci(num-2);
+          }
+        }
+        main2();
+      </pre>
+      <h3>결과</h3>
+      <pre>
+        1 : 1
+        2 : 1
+        3 : 2
+        4 : 3
+        5 : 5
+        6 : 8
+        7 : 13
+        8 : 21
+        9 : 34
+        10 : 55
+        11 : 89
+        12 : 144
+        13 : 233
+        14 : 377
+        15 : 610
+        16 : 987
+        17 : 1597
+        18 : 2584
+        19 : 4181
+        20 : 6765
+      </pre>
+
+      <h2>예제 26-2 : nCr의 재귀 해</h2>
+      <div>
+        재귀를 이용해서 nCr의 값을 구한다.
+      </div>
+      <h3>프로그램 : 피보나치 수열(재귀 해)</h3>
+      <pre>
+        function main2() {
+          var n;
+          for (n=1; n&lt;=20; n++) {
+            console.log(n + " : " + fibonacci(n));
+          }
+        }
+        function fibonacci(num) {
+          if (num == 1 || num == 2) {
+            return 1;
+          } else {
+            return fibonacci(num-1) + fibonacci(num-2);
+          }
+        }
+        main2();
+      </pre>
+      <h3>결과</h3>
+      <pre>
+        1 : 1
+        2 : 1
+        3 : 2
+        4 : 3
+        5 : 5
+        6 : 8
+        7 : 13
+        8 : 21
+        9 : 34
+        10 : 55
+        11 : 89
+        12 : 144
+        13 : 233
+        14 : 377
+        15 : 610
+        16 : 987
+        17 : 1597
+        18 : 2584
+        19 : 4181
+        20 : 6765
+      </pre>
+    </div>
+  </body>
+</html>
