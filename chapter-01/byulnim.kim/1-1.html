@@ -24,6 +24,30 @@
         }
 
         main();
+
+        function main2() {
+            var n, r;
+            var limit = 12;
+            for (n=0; n <= limit; n++) {
+                var row = "";
+                for(i=0;i<(limit+1)-(n+1)/2;i++) {
+                    row += "   "; // 공백
+                }
+                for (r=0; r <= n; r++) {
+                    if ((combi(n, r) + "").length == 1) {
+                        row += " " + combi(n, r) + " ";
+                    } else if ((combi(n, r) + "").length == 2) {
+                        row += " " + combi(n, r);
+                    } else {
+                        row += combi(n, r);
+                    }
+                }
+                console.log(row);
+            }
+        }
+
+        main2();
+        
     </script>
   </head>
   <body>
@@ -66,7 +90,46 @@
         <h2>연습문제 1 : 호너법</h2>
         이해안감
         <h2>프로그램 : 파스칼의 삼각형</h2>
-        이해안감
+        <pre>
+            function main2() {
+                var n, r;
+                var limit = 12;
+                for (n=0; n &lt;= limit; n++) {
+                    var row = "";
+                    for(i=0;i&lt;(limit+1)-(n+1)/2;i++) {
+                        row += "   "; // 공백
+                    }
+                    for (r=0; r &lt;= n; r++) {
+                        if ((combi(n, r) + "").length == 1) {
+                            row += " " + combi(n, r) + " ";
+                        } else if ((combi(n, r) + "").length == 2) {
+                            row += " " + combi(n, r);
+                        } else {
+                            row += combi(n, r);
+                        }
+                    }
+                    console.log(row);
+                }
+            }
+    
+            main2();
+        </pre>
+        <h3>결과 : 예쁘게 잘 안그려짐 ㅠㅠ 공백 넣기 어려움 ㅠㅠ</h3>
+        <pre>
+                                                         1 
+                                                      1  1 
+                                                      1  2  1 
+                                                   1  3  3  1 
+                                                   1  4  6  4  1 
+                                                1  5  10 10 5  1 
+                                                1  6  15 20 15 6  1 
+                                             1  7  21 35 35 21 7  1 
+                                             1  8  28 56 70 56 28 8  1 
+                                          1  9  36 84126126 84 36 9  1 
+                                          1  10 45120210252210120 45 10 1 
+                                       1  11 55165330462462330165 55 11 1 
+                                       1  12 66220495792924792495220 66 12 1 
+        </pre>
     </div>
   </body>
 </html>
