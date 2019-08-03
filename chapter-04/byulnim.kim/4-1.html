@@ -142,45 +142,35 @@
       <div>
         재귀를 이용해서 nCr의 값을 구한다.
       </div>
-      <h3>프로그램 : 피보나치 수열(재귀 해)</h3>
+      <h3>프로그램 : nCr 계산 (재귀 해)</h3>
       <pre>
-        function main2() {
-          var n;
-          for (n=1; n&lt;=20; n++) {
-            console.log(n + " : " + fibonacci(n));
+          function main3() {
+            var n, r;
+            for (n=0; n &lt;= 5; n++) {
+              var row = "";
+              for (r=0; r &lt;= n; r++) {
+                row += n + " C " + r +"=" + combi(n, r) + " ";
+              }
+              console.log(row);
+            }
           }
-        }
-        function fibonacci(num) {
-          if (num == 1 || num == 2) {
-            return 1;
-          } else {
-            return fibonacci(num-1) + fibonacci(num-2);
+          function combi(n, r) {
+            if (r==0 || r==n) {
+              return 1;
+            } else {
+              return combi(n-1, r) + combi(n-1, r-1);
+            }
           }
-        }
-        main2();
+          main3();
       </pre>
       <h3>결과</h3>
       <pre>
-        1 : 1
-        2 : 1
-        3 : 2
-        4 : 3
-        5 : 5
-        6 : 8
-        7 : 13
-        8 : 21
-        9 : 34
-        10 : 55
-        11 : 89
-        12 : 144
-        13 : 233
-        14 : 377
-        15 : 610
-        16 : 987
-        17 : 1597
-        18 : 2584
-        19 : 4181
-        20 : 6765
+          0 C 0=1 
+          1 C 0=1 1 C 1=1 
+          2 C 0=1 2 C 1=2 2 C 2=1 
+          3 C 0=1 3 C 1=3 3 C 2=3 3 C 3=1 
+          4 C 0=1 4 C 1=4 4 C 2=6 4 C 3=4 4 C 4=1 
+          5 C 0=1 5 C 1=5 5 C 2=10 5 C 3=10 5 C 4=5 5 C 5=1 
       </pre>
     </div>
   </body>
