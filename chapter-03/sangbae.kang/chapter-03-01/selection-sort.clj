@@ -19,8 +19,7 @@
   (if (empty? coll) coll
       (cons (second (min-value coll))
             (selection-sort (remove-nth (first (min-value coll)) coll)))))
-  
+
 (def coll [80 41 35 90 40 20])
-  
+
 (time (selection-sort coll))
-  
