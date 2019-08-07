@@ -24,7 +24,7 @@ function fib2(num) {
   return `${arr}`;
 }
 
-console.log(fib2(10));
+console.log(fib2(10)); 
 
 console.log('-------------------------------------------');
 
