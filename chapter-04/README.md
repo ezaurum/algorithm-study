@@ -17,3 +17,20 @@ Output: ["((()))", "(()())", "()(())", "(())()", "()()()"]
 Input: 4
 Output: ["(((())))", "((()()))", "(()(()))", "()((()))", "((())())", "(()()())", "()(()())", "(())(())", "()()(())", "((()))()", "(()())()", "()(())()", "(())()()", "()()()()"]
 ```
+
+https://repl.it/@typeon/chapter-04-exercise
+
+```
+(defn print-parentheses [st l r]
+  (if (and (= l 0) (= r 0)) (println "=:" st)
+      (if (>= l r)
+        (do
+            (when (> r 0) (print-parentheses (str ")" st) l (dec r)))
+            (when (> l 0) (print-parentheses (str "(" st) (dec l) r))
+            ))))
+
+(print-parentheses "" 1 1)
+(print-parentheses "" 2 2)
+(print-parentheses "" 3 3)
+(print-parentheses "" 4 4)
+```
