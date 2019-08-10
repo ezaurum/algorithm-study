@@ -19,4 +19,7 @@ Output: True
 
 Input: 12421
 Output: True
+
+Input: 102021
+Output: False
 ```
