@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <title>5-1</title>
+    <script type="text/javascript">
+        var _count = 0;
+        var _stack = [];
+        function push(val) {
+          document.getElementById("pushVal").value = "";
+
+          _stack[_count] = val;
+          _count++;
+
+          drawStack();
+        }
+        function pop() {
+          var stackLength = _stack.length;
+          _stack.splice([stackLength-1], 1);
+          _count--;
+
+          drawStack();
+        }
+        function drawStack() {
+          var stackHtml = "";
+          for (i=_stack.length-1; i>=0; i--) {
+            stackHtml += _stack[i] + "<br />";
+          }
+          document.getElementById("stack").innerHTML=stackHtml;
+        }
+    </script>
+  </head>
+  <body>
+    <h1>5-1. 스택</h1>
+    <div>
+        <h2>예제 32 : 푸시/팝</h2>
+        <div>
+          스택에 데이터를 저자하는 push 함수와 데이터를 추출하는 pop 함수를 작성한다.
+        </div>
+        <h3>프로그램 : 스택 (stack)</h3>
+        <pre>
+            var _count = 0;
+            var _stack = [];
+            function push(val) {
+              document.getElementById("pushVal").value = "";
+    
+              _stack[_count] = val;
+              _count++;
+    
+              drawStack();
+            }
+            function pop() {
+              var stackLength = _stack.length;
+              _stack.splice([stackLength-1], 1);
+              _count--;
+    
+              drawStack();
+            }
+            function drawStack() {
+              var stackHtml = "";
+              for (i=_stack.length-1; i&lt;=0; i--) {
+                stackHtml += _stack[i] + "<br />";
+              }
+              document.getElementById("stack").innerHTML=stackHtml;
+            }
+        </pre>
+        <h3>테스트</h3>
+        <input type="number" id="pushVal" />
+        <button type="button" onclick="push(document.getElementById('pushVal').value)">PUSH</button>
+        <button type="button" onclick="pop()">POP</button>
+        <h5>stack</h5>
+        <div id="stack">
+
+        </div>
+    </div>
+  </body>
+</html>
