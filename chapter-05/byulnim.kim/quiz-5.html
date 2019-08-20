@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>quiz-5</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+    <script>
+      function checkPalindrome(inputNumber) {
+        var num = inputNumber;
+        var resultVal = false;
+
+        if (inputNumber < 100) {
+          alert('세자리수 이상의 숫자를 입력해 주세요.');
+          return;
+        }
+
+        var counter = 0;
+        var resultNum = 0;
+        var share = inputNumber;
+        var remainderArray = [];
+        
+        while ((parseInt(share / 10)) > 0) {
+          var remainder = share % 10;
+          share = parseInt(share / 10);
+          remainderArray.push(remainder);
+          counter++; // 몇번돌았는지 알기위한 숫자
+        } 
+        remainderArray.push(share); //마지막으로 나온 몫도 푸시
+        
+        for (var i=0; i<remainderArray.length; i++) {
+          resultNum += (remainderArray[i] * Math.pow(10, counter));
+          counter--;
+        }
+
+        document.getElementById("resultArea").textContent= inputNumber == resultNum ? "맞음" : "아님";
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+      <input type="number" id="numberInput" /><span>3자리 이상의 숫자를 입력해 주세요.</span>
+      <button type="button" onclick="checkPalindrome(document.getElementById('numberInput').value)">정수 팰린드롬 맞음??</button>
+      <span id="resultArea"></span>
+    </div>
+  </body>
+</html>
