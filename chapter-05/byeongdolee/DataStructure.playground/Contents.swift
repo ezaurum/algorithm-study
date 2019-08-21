@@ -60,15 +60,161 @@ class Queue<Element> {
 }
 
 // 위의 스택과는 다르게 들어간 순서대로 출력됨
-let queue = Queue<Int>()
-for i in 0...100 {
-    queue.queueIn(newElement: i)
+//let queue = Queue<Int>()
+//for i in 0...100 {
+//    queue.queueIn(newElement: i)
+//}
+//
+//for _ in 0...100 {
+//    print(queue.queueOut())
+//}
+
+
+class NamedElement {
+    var name: String
+    
+    init(_ name: String) {
+        self.name = name
+    }
 }
 
-for _ in 0...100 {
-    print(queue.queueOut())
+// 리스트
+class Profile: NamedElement, CustomStringConvertible {
+    var tel: String
+    var description: String {
+        return "name: \(name), tel: \(tel)"
+    }
+    
+    init(_ name: String, _ tel: String) {
+        self.tel = tel
+        super.init(name)
+    }
 }
 
-queue
 
 
+class Node<NamedElement> {
+    var data: NamedElement?
+    var pointer: Node<NamedElement>?
+    
+    init() {
+        
+    }
+    
+    init(_ data: NamedElement) {
+        self.data = data
+    }
+    
+    init(_ data: NamedElement, _ next: Node<NamedElement>) {
+        self.data = data
+        self.pointer = next
+    }
+}
+
+
+class List<Element> {
+    var head = Node<NamedElement>()
+    
+    func add(newElement element: NamedElement) {
+        if head.pointer != nil {
+            var n = head.pointer!
+            while n.pointer != nil {
+                n = n.pointer!
+            }
+            n.pointer = Node<NamedElement>(element)
+        } else {
+            head.pointer = Node<NamedElement>(element)
+        }
+        
+    }
+    
+    func display() {
+        guard let hp = head.pointer else { return }
+        
+        var p: Node<NamedElement>? = hp
+        while p != nil {
+            print(p?.data ?? "no data")
+            p = p?.pointer
+        }
+    }
+    
+    func find(by name: String) -> NamedElement? {
+        var p = head.pointer
+        var old: Node<NamedElement>? = nil
+        while p != nil {
+            if p!.data?.name == name {
+                old?.pointer = p?.pointer
+                p?.pointer = head.pointer
+                head.pointer = p
+                return p!.data!
+            }
+            old = p
+            p = p!.pointer
+        }
+        
+        return nil
+    }
+}
+
+
+
+var list = List<Profile>()
+
+for i in 0...10 {
+    let profile = Profile("name\(i)", "tel\(i)")
+    list.add(newElement: profile)
+}
+//
+//list.display()
+//print("-------------------")
+//list.find(by: "name5")
+//list.find(by: "hello")
+//list.find(by: "name10")
+//list.display()
+
+class Hash {
+    private var array = [Node<NamedElement>?](repeating: nil, count: 1000)
+    
+    func search(by name: String) -> NamedElement? {
+        var hash = name.hashValue % 1000
+        if hash < 0 {
+            hash *= -1
+        }
+        var node = array[hash]
+        
+        while node != nil {
+            if node?.data?.name == name {
+                return node!.data!
+            }
+            node = node?.pointer
+        }
+        return nil
+    }
+    
+    func add(newElement element: NamedElement) {
+        var hash = element.name.hashValue % 1000
+        if hash < 0 {
+            hash *= -1
+        }
+        var node = array[hash]
+        if node == nil {
+            array[hash] = Node<NamedElement>(element)
+            return
+        }
+        
+        while node?.pointer != nil {
+            node = node?.pointer
+        }
+        
+        node?.pointer = Node<NamedElement>(element)
+    }
+    
+}
+
+let hash = Hash()
+hash.add(newElement: Profile("병도리", "010-6649-6321"))
+hash.add(newElement: Profile("방구", "1234"))
+hash.add(newElement: Profile("메롱", "5678"))
+
+hash.search(by: "병도리")
+hash.search(by: "방구")
