@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>quiz-6</title>
+    <script>
+      function getIndex(inputNumberArray, targetNumber) {
+        var numberArray = inputNumberArray.split(', ').map(function(item) {
+          return parseInt(item, 10);
+        });
+        var resultIdx1, resultIdx2 = 0;
+        for(var i=0; i < numberArray.length; i++) {
+          if (numberArray.indexOf(targetNumber - parseInt(inputNumberArray[i])) > -1) {
+            resultIdx1 = i;
+            resultIdx2 = numberArray.indexOf(targetNumber - parseInt(inputNumberArray[i]));
+          }
+        }
+        if (resultIdx1 == 0 && resultIdx2 == 0) {
+          document.getElementById("resultArea").textContent= '결과없음';
+        } else {
+          document.getElementById("resultArea").textContent= resultIdx1 + ', ' + resultIdx2;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h2>합의 요소 2개 찾기</h2>
+    <div>
+      <input type="text" id="numberInput" value="2, 5, 6, 1, 10" /><span>', '으로 구분되는 숫자 배열을 입력해주세요.</span>
+    </div>
+    <div>
+      <input type="number" id="targetInput" value="8" /><span>target 숫자를 입력해주세요.</span>
+    </div>
+    <div>
+        <button type="button" onclick="getIndex(document.getElementById('numberInput').value, document.getElementById('targetInput').value)">target숫자를 만들수 있는 숫자가 들어있는 인덱스는?</button>
+        <span id="resultArea"></span>
+    </div>
+  </body>
+</html>
