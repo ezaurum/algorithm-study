@@ -32,12 +32,6 @@ func search(for key: String) -> String {
     }
 }
 
-
-search(for: "Matilda")
-search(for: "fuck")
-search(for: "Candy")
-search(for: "Nancy")
-
 func insert(_ key: String) {
     var node = arr[0]
     
@@ -65,16 +59,22 @@ func insert(_ key: String) {
     }
 }
 
-search(for: "Byeongdolee")
-insert("Byeongdolee")
-insert("Byeongdolee2")
-insert("Byeongdolee3")
-insert("Byeongdolee4")
-insert("Byeongdolee5")
-insert("fuck")
-search(for: "Byeongdolee2")
-search(for: "fuck")
-arr
+//
+//search(for: "Matilda")
+//search(for: "fuck")
+//search(for: "Candy")
+//search(for: "Nancy")
+//
+//search(for: "Byeongdolee")
+//insert("Byeongdolee")
+//insert("Byeongdolee2")
+//insert("Byeongdolee3")
+//insert("Byeongdolee4")
+//insert("Byeongdolee5")
+//insert("fuck")
+//search(for: "Byeongdolee2")
+//search(for: "fuck")
+//arr
 
 class NodeLinkVersion<Element> {
     var left: NodeLinkVersion?
@@ -142,26 +142,143 @@ func insertLinkV(_ key: String) {
     }
 }
 
+//searchLinkV(for: "hello")
+//searchLinkV(for: "fuck")
+//
+//insertLinkV("hello")
+//insertLinkV("fuck")
+//
+//searchLinkV(for: "hello")
+//searchLinkV(for: "fuck")
+//
+//searchLinkV(for: "Byeongdolee")
+//insertLinkV("Byeongdolee")
+//insertLinkV("Byeongdolee2")
+//insertLinkV("Byeongdolee3")
+//insertLinkV("Byeongdolee4")
+//insertLinkV("Byeongdolee5")
+//
+//searchLinkV(for: "Byeongdolee")
+//searchLinkV(for: "Byeongdolee2")
+//searchLinkV(for: "Byeongdolee3")
+//searchLinkV(for: "Byeongdolee4")
+//searchLinkV(for: "Byeongdolee5")
 
-searchLinkV(for: "hello")
-searchLinkV(for: "fuck")
 
-insertLinkV("hello")
-insertLinkV("fuck")
+func gentree(_ node: NodeLinkVersion<String>?, _ key: String) -> NodeLinkVersion<String> {
+    if node == nil {
+        return NodeLinkVersion<String>(nil, key, nil)
+    }
+    
+    // 있으면 걍 리턴
+    if node!.data == key {
+        return node!
+    }
+    
+    if key < node!.data {
+        node!.left = gentree(node!.left, key)
+    } else {
+        node!.right = gentree(node!.right, key)
+    }
+    return node!
+}
 
-searchLinkV(for: "hello")
-searchLinkV(for: "fuck")
+func searchRecursive(_ node: NodeLinkVersion<String>?, _ key: String) -> String {
+    guard let n = node else { return "not found" }
+    
+    if n.data == key {
+        return "FOUND!!"
+    }
+    
+    if key < n.data {
+        return searchRecursive(n.left, key)
+    } else {
+        return searchRecursive(n.right, key)
+    }
+}
 
-searchLinkV(for: "Byeongdolee")
-insertLinkV("Byeongdolee")
-insertLinkV("Byeongdolee2")
-insertLinkV("Byeongdolee3")
-insertLinkV("Byeongdolee4")
-insertLinkV("Byeongdolee5")
 
-searchLinkV(for: "Byeongdolee")
-searchLinkV(for: "Byeongdolee2")
-searchLinkV(for: "Byeongdolee3")
-searchLinkV(for: "Byeongdolee4")
-searchLinkV(for: "Byeongdolee5")
+root = gentree(root, "50")
+root = gentree(root, "35")
+root = gentree(root, "25")
+root = gentree(root, "40")
+root = gentree(root, "36")
+root = gentree(root, "41")
+root = gentree(root, "60")
+
+
+func treewalk1(_ node: NodeLinkVersion<String>?) {
+    guard let n = node else { return }
+    print(n.data)
+    treewalk1(n.left)
+    treewalk1(n.right)
+}
+
+
+func treewalk2(_ node: NodeLinkVersion<String>?) {
+    guard let n = node else { return }
+    treewalk2(n.left)
+    print(n.data)
+    treewalk2(n.right)
+}
+
+func treewalk3(_ node: NodeLinkVersion<String>?) {
+    guard let n = node else { return }
+    treewalk3(n.left)
+    treewalk3(n.right)
+    print(n.data)
+}
+
+func treewalkDesc(_ node: NodeLinkVersion<String>?) {
+    guard let n = node else { return }
+    treewalkDesc(n.right)
+    print(n.data)
+    treewalkDesc(n.left)
+}
+
+// treewalkDesc(root)
+
+class Stack<Element> {
+    private var array = Array<Element?>(repeating: nil, count: 16)
+    private var pointer: Int = 0
+    var size: Int {
+        return pointer
+    }
+    
+    func push(newElement element: Element) {
+        if array.count == pointer {
+            array.append(contentsOf: repeatElement(nil, count: array.count)) // 사이즈 2배로 늘림
+        }
+        array[pointer] = element
+        pointer += 1
+    }
+    
+    func pop() -> Element {
+        pointer -= 1
+        guard let ele = array[pointer] else { fatalError() }
+        array[pointer] = nil
+        return ele
+    }
+}
+
+var stack = Stack<NodeLinkVersion<String>>()
+
+// 왜 팝 하고나서 프린트 하는지 궁금했는데... 해보고 나니 이게 더 심플하네..
+func treewalkStack() {
+    var node = root
+    
+    while node != nil || stack.size != 0 {
+        while node != nil {
+            stack.push(newElement: node!)
+            node = node!.left
+        }
+        node = stack.pop()
+        print(node!.data)
+        node = node!.right
+    }
+}
+
+treewalkStack()
+
+
 
