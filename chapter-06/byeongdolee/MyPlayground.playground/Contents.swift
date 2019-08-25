@@ -391,3 +391,28 @@ func sortHeapDesc() {
 sortHeapDesc()
 notHeap
 
+let operators = ["+", "-", "*", "/"]
+let expression = "ab*cd+e/-"
+var idx = expression.index(before: expression.endIndex)
+
+func polishTransform() -> NodeLinkVersion<String> {
+    let data = String(expression[idx])
+    
+    let node = NodeLinkVersion<String>(nil, data, nil)
+    
+    if operators.contains(data) {
+        idx = expression.index(before: idx)
+        node.right = polishTransform()
+        idx = expression.index(before: idx)
+        node.left = polishTransform()
+    }
+    
+    return node
+}
+
+let n = polishTransform()
+treewalk1(n)
+print("0--------------")
+treewalk2(n)
+print("0--------------")
+treewalk3(n)
