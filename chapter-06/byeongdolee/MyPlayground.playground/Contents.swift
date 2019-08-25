@@ -278,7 +278,116 @@ func treewalkStack() {
     }
 }
 
-treewalkStack()
+//treewalkStack()
 
+var q = Stack<NodeLinkVersion<String>>()
+var w = Stack<NodeLinkVersion<String>>()
 
+q.push(newElement: root!)
+
+func treewalkLevel() {
+    
+    var level = 0
+    
+    print("--------------")
+    print("level: \(level)")
+    while true {
+        if q.size > 0 {
+            let n = q.pop()
+            print(n.data)
+            if n.left != nil {
+                w.push(newElement: n.left!)
+            }
+            if n.right != nil {
+                w.push(newElement: n.right!)
+            }
+        } else {
+            if w.size == 0 {
+                break
+            } else {
+                q = w
+                w = Stack<NodeLinkVersion<String>>()
+                level += 1
+                print("--------------")
+                print("level: \(level)")
+            }
+        }
+    }
+}
+
+//treewalkLevel()
+
+var heap = [10, 25, 15, 30, 26, 20, 29, 35, 40, 27, 28, 22]
+
+func insertHeap(_ num: Int) {
+    
+    heap.append(num)
+    var newIdx = heap.count - 1
+    var idx = (newIdx - 1) / 2
+    var parentNum = heap[idx]
+    while idx >= 2, parentNum > num {
+        heap[idx] = num
+        heap[newIdx] = parentNum
+        newIdx = idx
+        idx = (newIdx - 1) / 2
+        parentNum = heap[idx]
+    }
+}
+
+//insertHeap(12)
+//heap
+
+var notHeap = [26, 29, 15, 30, 20, 22, 35, 25, 40, 27, 10, 28]
+func rebuildToheap(_ count: Int) {
+    
+    for i in (0...count/2).reversed() {
+        
+        var parentIdx = i
+        
+        while true {
+            let parent = notHeap[parentIdx]
+            let leftIdx = parentIdx * 2
+            let rightIdx = leftIdx + 1
+            
+            var childIdx = 0
+            
+            if leftIdx >= count {
+                break
+            }
+            
+            if rightIdx == count {
+                childIdx = leftIdx
+            } else {
+                childIdx = notHeap[leftIdx] > notHeap[rightIdx] ? rightIdx : leftIdx
+            }
+            
+            if parent > notHeap[childIdx] {
+                notHeap[parentIdx] = notHeap[childIdx]
+                notHeap[childIdx] = parent
+                parentIdx = childIdx
+            } else {
+                break
+            }
+        }
+    }
+}
+
+rebuildToheap(notHeap.count)
+notHeap
+
+func sortHeapDesc() {
+    
+    let count = notHeap.count
+    var size = count
+    for _ in 0..<count {
+        size -= 1
+        let tmp = notHeap[0]
+        notHeap[0] = notHeap[size]
+        notHeap[size] = tmp
+        rebuildToheap(size)
+    }
+}
+
+sortHeapDesc()
+notHeap
 
