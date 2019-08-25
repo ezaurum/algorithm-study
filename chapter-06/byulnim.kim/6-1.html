@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <title>6-1</title>
+    <script type="text/javascript">
+      function strcmp ( str1, str2 ) {
+        return ( ( str1 == str2 ) ? 0 : ( ( str1 > str2 ) ? 1 : -1 ) );
+      }
+
+      var tnode = [
+        {left: 1, name: 'Matilda', right: 2},
+        {left: 3, name: 'Candy', right: 4},
+        {left: 5, name: 'Rolla', right: null},
+        {left: null, name: 'Ann', right: null},
+        {left: 6, name: 'Emy', right: 7},
+        {left: null, name: 'Nancy', right: null},
+        {left: null, name: 'Eluza', right: null},
+        {left: null, name: 'Lisa', right: null},
+      ];
+
+      function searchByKey(k) {
+        var p = 0;
+        while(p != null) {
+          if (strcmp(k, tnode[p].name) === 0) {
+            document.getElementById('result').innerText = "찾았습니다";
+            break;
+          } 
+          else if (strcmp(k, tnode[p].name) < 0) {
+            p = tnode[p].left;
+            document.getElementById('result').innerText = "없는 이름입니다.";
+          } else {
+            p = tnode[p].right;
+            document.getElementById('result').innerText = "없는 이름입니다.";
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>6-1. 배열을 이용한 이진 탐색 트리</h1>
+    <div>
+        <h2>예제 42 : 이진 탐색 트리에서의 탐색</h2>
+        <div>
+          배열을 이용한 이진 탐색 트리에서 탐색을 수행한다.
+        </div>
+        <h3>프로그램 : 배열을 이용한 이진 탐색 트리</h3>
+        <pre>
+            function strcmp ( str1, str2 ) {
+              return ( ( str1 == str2 ) ? 0 : ( ( str1 &gt; str2 ) ? 1 : -1 ) );
+            }
+      
+            var tnode = [
+              {left: 1, name: 'Matilda', right: 2},
+              {left: 3, name: 'Candy', right: 4},
+              {left: 5, name: 'Rolla', right: null},
+              {left: null, name: 'Ann', right: null},
+              {left: 6, name: 'Emy', right: 7},
+              {left: null, name: 'Nancy', right: null},
+              {left: null, name: 'Eluza', right: null},
+              {left: null, name: 'Lisa', right: null},
+            ];
+      
+            function searchByKey(k) {
+              var p = 0;
+              while(p != null) {
+                if (strcmp(k, tnode[p].name) === 0) {
+                  document.getElementById('result').innerText = "찾았습니다";
+                  break;
+                } 
+                else if (strcmp(k, tnode[p].name) &lt; 0) {
+                  p = tnode[p].left;
+                  document.getElementById('result').innerText = "없는 이름입니다.";
+                } else {
+                  p = tnode[p].right;
+                  document.getElementById('result').innerText = "없는 이름입니다.";
+                }
+              }
+            }
+        </pre>
+        <h3>테스트</h3>
+        <input type="text" id="key" />
+        <button type="button" onclick="searchByKey(document.getElementById('key').value)">찾기</button>
+        <h5>result</h5>
+        <div id="result">
+
+        </div>
+    </div>
+  </body>
+</html>
