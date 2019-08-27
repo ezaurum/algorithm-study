@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>지능형 데이터베이스</title>
+    <style>
+    #process-area,
+    #question-area {
+        width: 50%;
+        position: absolute;
+        top: 0;
+        padding: 2rem;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    #question-area {
+        right: 0;
+        border-left: 1px solid gray;
+    }
+
+    #confirm-area {
+        position: absolute;
+        background: darkgray;
+        width: 50%;
+        margin: 10px auto;
+        height: 50%;
+    }
+
+    .hide {
+        display: none;
+    }
+    </style>
+</head>
+<body>
+<div id="question-area">
+    <p id="question"></p>
+    <button id="yes-button">예</button>
+    <button id="no-button">아니오</button>
+    <p id="answer"></p>
+</div>
+<ul id="process-area">
+
+</ul>
+<div id="confirm-area" class="hide">
+    <button id="confirm-answer">맞음</button>
+    <label for="correct-question">질문</label><input type="text" id="correct-question">
+    <label for="correct-answer">정답</label><input type="text" id="correct-answer">
+    <button id="add-node">정답 입력</button>
+</div>
+<script>
+// Node 클래스 선언
+function Node(text) {
+  this.text = text
+}
+
+Node.prototype.setLeft = function (left) {
+  this.left = left
+  return this
+}
+
+Node.prototype.setRight = function (right) {
+  this.right = right
+  return this
+}
+
+Node.prototype.print = function () {
+  return `left: ${this.left ? this.left.text : '없음'}, text: ${this.text}, right: ${this.right ? this.right.text : '없음'}`
+}
+
+// 질문지 설정
+const a = new Node('배용준')
+const b = new Node('최지우')
+const c = new Node('이봉주')
+const d = new Node('보아')
+const e = new Node('여배우입니까?').setLeft(b).setRight(a)
+const f = new Node('가수입니까?').setLeft(d).setRight(e)
+const g = new Node('연예인입니까?').setLeft(f).setRight(c)
+
+// 버튼 및 기본 객체 지정
+const qText = document.getElementById('question')
+const aText = document.getElementById('answer')
+
+const processArea = document.getElementById('process-area')
+
+
+// 응답 버튼 설정
+const yButton = document.getElementById('yes-button')
+const nButton = document.getElementById('no-button')
+yButton.addEventListener('click', (e) => {
+  turn(true)
+  e.preventDefault()
+})
+
+nButton.addEventListener('click', (e) => {
+  turn(false)
+  e.preventDefault()
+})
+
+let currentNode = g
+let prevNode = null
+
+const present = () => {
+
+  processArea.innerHTML += `<li>${currentNode.print()}</li>`
+
+  if (currentNode.left) {
+    qText.innerText = currentNode.text
+  } else {
+    yButton.disabled = true
+    nButton.disabled = true
+    aText.innerText = currentNode.text
+    confirm()
+  }
+}
+
+const turn = (yn) => {
+  prevNode = currentNode
+  if (yn) {
+    currentNode = currentNode.left
+  } else {
+    currentNode = currentNode.right
+  }
+  present()
+}
+
+
+// 정답 맞추거나 이후 처리
+const confirmArea = document.getElementById('confirm-area')
+const confirmAnswer = document.getElementById('confirm-answer')
+const addNode = document.getElementById('add-node')
+confirmAnswer.addEventListener('click', (e) => {
+  confirmArea.className = 'hide'
+  e.preventDefault()
+})
+
+addNode.addEventListener('click', (e) => {
+  let old = prevNode.left
+  const correctQuestion = document.getElementById('correct-question')
+  const correctAnswer = document.getElementById('correct-answer')
+  prevNode.left = new Node(correctQuestion.value).setRight(old).setLeft(new Node(correctAnswer.value))
+
+  correctQuestion.value = ''
+  correctAnswer.value = ''
+
+  confirmArea.className = 'hide'
+
+  yButton.disabled = null
+  nButton.disabled = null
+
+  aText.innerText = ''
+  qText.innerText = ''
+  processArea.innerHTML = ''
+
+  currentNode = g
+  prevNode = null
+
+  present()
+
+  e.preventDefault()
+})
+
+const confirm = () => {
+  confirmArea.className = ''
+}
+
+
+// 질문 시작
+present()
+
+</script>
+</body>
+</html>
