@@ -53,8 +53,8 @@ function Change(num, base) {
     var s = new Stack();
     do {
         s.push(num % base);
+        console.log(num % base)
         num = Math.floor(num = num / base);
-        //console.log(num % base)
     } while(num > 0);
 
     var converted = '';
