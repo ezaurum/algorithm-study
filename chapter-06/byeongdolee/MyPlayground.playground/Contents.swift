@@ -338,14 +338,14 @@ func insertHeap(_ num: Int) {
 //heap
 
 var notHeap = [26, 29, 15, 30, 20, 22, 35, 25, 40, 27, 10, 28]
-func rebuildToheap(_ count: Int) {
+func rebuildToheap(_ target: inout [Int], _ count: Int) {
     
     for i in (0...count/2).reversed() {
         
         var parentIdx = i
         
         while true {
-            let parent = notHeap[parentIdx]
+            let parent = target[parentIdx]
             let leftIdx = parentIdx * 2
             let rightIdx = leftIdx + 1
             
@@ -358,12 +358,12 @@ func rebuildToheap(_ count: Int) {
             if rightIdx == count {
                 childIdx = leftIdx
             } else {
-                childIdx = notHeap[leftIdx] > notHeap[rightIdx] ? rightIdx : leftIdx
+                childIdx = target[leftIdx] > target[rightIdx] ? rightIdx : leftIdx
             }
             
-            if parent > notHeap[childIdx] {
-                notHeap[parentIdx] = notHeap[childIdx]
-                notHeap[childIdx] = parent
+            if parent > target[childIdx] {
+                target[parentIdx] = target[childIdx]
+                target[childIdx] = parent
                 parentIdx = childIdx
             } else {
                 break
@@ -372,7 +372,7 @@ func rebuildToheap(_ count: Int) {
     }
 }
 
-rebuildToheap(notHeap.count)
+rebuildToheap(&notHeap, notHeap.count)
 notHeap
 
 func sortHeapDesc() {
@@ -384,7 +384,7 @@ func sortHeapDesc() {
         let tmp = notHeap[0]
         notHeap[0] = notHeap[size]
         notHeap[size] = tmp
-        rebuildToheap(size)
+        rebuildToheap(&notHeap, size)
     }
 }
 
@@ -409,10 +409,12 @@ func polishTransform() -> NodeLinkVersion<String> {
     
     return node
 }
+//
+//let n = polishTransform()
+//treewalk1(n)
+//print("0--------------")
+//treewalk2(n)
+//print("0--------------")
+//treewalk3(n)
 
-let n = polishTransform()
-treewalk1(n)
-print("0--------------")
-treewalk2(n)
-print("0--------------")
-treewalk3(n)
+
