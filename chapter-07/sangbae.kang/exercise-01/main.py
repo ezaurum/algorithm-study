@@ -1,7 +1,7 @@
 def intersect(a, b):
     if a[0] <= b[1] or a[1] <= b[0]:
         return True, [min(a[0], b[0]), max(a[1], b[1])]
-    return False, a
+    return False, None
 
 
 def merge_intersection(intervals):
