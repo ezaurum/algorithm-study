@@ -132,4 +132,35 @@ func breadthFirstSearch() {
     }
 }
 
-breadthFirstSearch()
+// breadthFirstSearch()
+
+
+var d = [10, 5, 4, 3, -1, 8, 15]
+
+func findSecond() {
+    var first = d[0]
+    var second = d[0]
+    
+    for i in 1..<d.count {
+        let current = d[i]
+        
+        if current > first {
+            second = first
+            first = current
+        } else if current > second {
+            second = current
+        } else if first == second {
+            second = current
+        }
+    }
+    
+    if first == second {
+        print("Does not exist.")
+    } else {
+        print("first: \(first), second: \(second)")
+    }
+    
+}
+
+findSecond()
+
